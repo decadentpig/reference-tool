@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RMIT Harvard Reference Tool</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body onload="init()">
+    <form id="inputs-form">
+        <input type="text" id="author-first" placeholder="AUTHOR FIRST NAME">
+        <input type="text" id="author-last" placeholder="AUTHOR LAST NAME">
+        <input type="text" id="article-name" placeholder="ARTICLE NAME">
+        <input type="text" id="pub-year" placeholder="YEAR PUBLISHED">
+        <input type="text" id="publication" placeholder="PUBLICATION NAME">
+        <input type="text" id="date-viewed" placeholder="DATE VIEWED: TYPE 'T' FOR TODAY OR DD/MM/YYYY">
+        <input type="text" id="url" placeholder="URL">
+        <button type="button" onclick="createReference(); return false;">SUBMIT</button>
+        <button type="button" onclick="toggleView()">SHOW LIST</button>
+    </form>
+
+    <div id="ref-list">
+        <div id="inner-container">
+            <ul id="references"></ul>
+        </div>
+        <button type="button" onclick="toggleView()">ADD REFERENCE</button>
+    </div>
+</body>
+
+<script src="script.js"></script>
+
+</html>
