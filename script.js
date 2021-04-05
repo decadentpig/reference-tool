@@ -1,5 +1,5 @@
 let inputsForm = document.querySelector("#inputs-form");
-let refList = document.querySelector("#ref-list");
+let refListPage = document.querySelector("#ref-list");
 
 function init() {
   inputsForm.style.display = "grid";
@@ -8,9 +8,9 @@ function init() {
 function toggleView() {
   if (inputsForm.style.display === "grid") {
     inputsForm.style.display = "none";
-    refList.style.display = "grid";
+    refListPage.style.display = "grid";
   } else {
-    refList.style.display = "none";
+    refListPage.style.display = "none";
     inputsForm.style.display = "grid";
   }
 }
@@ -25,13 +25,17 @@ function createReference() {
   let publication = document.getElementById("publication").value;
   let dateViewed = document.getElementById("date-viewed").value;
   let url = document.getElementById("url").value;
-  
-  // GRAB AND CASE-CORRECT AUTHOR'S FIRST NAME:
-  authorFirst = authorFirst[0].toUpperCase();
-  // AUTHOR FIRST NAMEINPUT VALIDATION
-  if (authorFirst.length < 1) authorFirst = "INPUT ERROR - FIRST NAME";
 
-  // GRAB AND CASE-CORRECT AUTHOR'S SURNAME, ACCOUNTING FOR SPACES:
+  // Incremented by each correct input.
+  let validations = 0;
+  
+  // Grab author's initial, print error for invalid input.
+  authorFirst = authorFirst[0].toUpperCase();
+  if (authorFirst.length < 1) {
+    authorFirst = "INPUT ERROR - FIRST NAME";
+  } else validations++;
+
+  // Capitalise author's surname, accounting for names with spaces.
   if (authorLast.indexOf(" ") != -1) {
     let separateNames = authorLast.split(" ");
     for (let i = 0; i < separateNames.length; i++) {
@@ -42,32 +46,38 @@ function createReference() {
   } else {
     authorLast = authorLast[0].toUpperCase() + authorLast.slice(1).toLowerCase();
   }
-  // AUTHOR LAST NAME INPUT VALIDATION
-  if (authorLast.length < 2) authorLast = "INPUT ERROR - LAST NAME";
+  // Author surname: print error for invalid input.
+  if (authorLast.length < 2) {
+      authorLast = "INPUT ERROR - LAST NAME";
+  } else validations++;
 
-  // ARTICLE NAME INPUT VALIDATION
-  if (articleName.split(" ").length < 1) articleName = "INPUT ERROR - ARTICLE NAME";
-  
-  // PUBLICATION YEAR AUTOFILL & INPUT VALIDATION
+  // Check for appropriate length in article title.
+  if (articleName.split(" ").length < 1) {
+      articleName = "INPUT ERROR - ARTICLE NAME";
+  } else validations++;
+
+  // Check length of publication name.
+  if (publication.length < 2) {
+      publication = "INPUT ERROR - PUBLICATION NAME";
+  } else validations++;
+
+  // Create new Date object for use with autofill feature and to validate year input.
   clock = new Date();
-  if (pubYear === "T" || pubYear == "t") pubYear = clock.getFullYear(); // TO-DO: Update w regex.
-  if (pubYear < 1000 || pubYear > clock.getFullYear()) pubYear = "INPUT ERROR - PUBLICATION YEAR";
-  
-  // PUBLICATION NAME INPUT VALIDATION
-  if (publication.length < 1) publication = "INPUT ERROR - PUBLICATION NAME";
-  
-  // VALIDATE DATE VIEWED INPUT
-  if (dateViewed === "T" || dateViewed === "t") { // TO-DO: Update w regex.
-    dateViewed = clock.getDate() + "/" + clock.getMonth()+1 + "/" + clock.getFullYear();
-    console.log("Made the month: ", clock.getMonth()+1);
-  } else if (dateViewed.length != 10) { // TO-DO: Update w regex.
+  let autofillRegex = /^T$/i;
+  if (autofillRegex.test(pubYear)) pubYear = clock.getFullYear();
+  if (pubYear < 1000 || pubYear > clock.getFullYear()) {
+      pubYear = "INPUT ERROR - PUBLICATION YEAR";
+  } else validations++;
+
+  // Allow autofill for date viewed, validate input.
+  let dateFormatRegex = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+  if (autofillRegex.test(dateViewed)) dateViewed = clock.getDate() + "/" + (clock.getMonth()+1) + "/" + clock.getFullYear();
+  if (!dateFormatRegex.test(dateViewed)) {
     dateViewed = "INPUT ERROR - DATE VIEWED";
-  }
-  
-  // CONVERT FROM DATE FORMAT
-  console.log("dateViewed before array split: ", dateViewed);
+  } else validations++;
+
+  // Convert DD/MM/YYYY to written format.
   let dateArray = dateViewed.split("/");
-  console.log("date array is: ", dateArray);
   let months = [
     "January",
     "Feburary",
@@ -84,8 +94,19 @@ function createReference() {
   ];
   dateViewed = dateArray[0] + " " + months[dateArray[1]-1] + " " + dateArray[2];
   
-  // COMPILE CORRECT REFERENCE FROM INPUTS
-  reference = `${authorLast}, ${authorFirst} ${pubYear}, <i>${articleName}</i>, ${publication}, ${dateViewed}, &#60${url}&#62.`;
-  
-  referenceList.innerHTML += `<li>${reference}</li>`;
+  if (validations === 6) {
+    reference = `${authorLast}, ${authorFirst} ${pubYear}, <i>${articleName}</i>, ${publication}, ${dateViewed}, &#60${url}&#62.`;
+    referenceList.innerHTML += `<li>${reference}</li><br>`;
+    clearInputForm();
+  }
+}
+
+function clearInputForm() {
+    document.getElementById("author-first").value = "";
+    document.getElementById("author-last").value = "";
+    document.getElementById("article-name").value = "";
+    document.getElementById("pub-year").value = "";
+    document.getElementById("publication").value = "";
+    document.getElementById("date-viewed").value = "";
+    document.getElementById("url").value = "";
 }

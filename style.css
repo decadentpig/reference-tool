@@ -1,6 +1,7 @@
 body {
     background-color: #005e7a;
     font-family: 'Oswald', sans-serif;
+    color: hsla(194, 100%, 41%, 0.92);
   }
   
   #inputs-form, #ref-list {
@@ -56,4 +57,8 @@ body {
   }
   input:focus {
     border-style: none;
+  }
+
+  ul {
+      list-style-type: none;
   }
