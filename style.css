@@ -12,9 +12,9 @@ body {
     display: none;
     
     border-radius: 44px;
-    background: #005e7a;
-    box-shadow:  41px 41px 82px #005068,
-               -41px -41px 82px #006c8c;
+background: #005e7a;
+box-shadow:  8px 8px 11px #00526a,
+             -8px -8px 11px #006a8a;
   }
   
   input, button {
