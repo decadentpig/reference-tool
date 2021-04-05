@@ -110,3 +110,7 @@ function clearInputForm() {
     document.getElementById("date-viewed").value = "";
     document.getElementById("url").value = "";
 }
+
+function clearRefList() {
+    document.getElementById("references").innerHTML = "";
+}

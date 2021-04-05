@@ -19,6 +19,7 @@
         <input type="text" id="url" placeholder="URL">
         <button type="button" onclick="createReference(); return false;">SUBMIT</button>
         <button type="button" onclick="toggleView()">SHOW LIST</button>
+        <button type="button" onclick="clearInputForm()">CLEAR</button>
     </form>
 
     <div id="ref-list">
@@ -26,6 +27,7 @@
             <ul id="references"></ul>
         </div>
         <button type="button" onclick="toggleView()">ADD REFERENCE</button>
+        <button type="button" onclick="clearRefList()">CLEAR REFERENCE LIST</button>
     </div>
 </body>
 <script src="script.js"></script>
