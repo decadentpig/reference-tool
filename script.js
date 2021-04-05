@@ -95,7 +95,7 @@ function createReference() {
   dateViewed = dateArray[0] + " " + months[dateArray[1]-1] + " " + dateArray[2];
   
   if (validations === 6) {
-    reference = `${authorLast}, ${authorFirst} ${pubYear}, <i>${articleName}</i>, ${publication}, ${dateViewed}, &#60${url}&#62.`;
+    reference = `${authorLast}, ${authorFirst} ${pubYear}, <i>${articleName}</i>, ${publication}, viewed ${dateViewed}, &#60${url}&#62.`;
     referenceList.innerHTML += `<li>${reference}</li><br>`;
     clearInputForm();
   }
