@@ -54,8 +54,8 @@ function createReference() {
       separateNames[i] = capital + separateNames[i].slice(1).toLowerCase();
     }
     authorLast = separateNames.join(" ");
-  } 
-  if (authorLast.length > 0) {
+    validations++;
+  } else if (authorLast.length > 0) {
     authorLast = authorLast[0].toUpperCase() + authorLast.slice(1).toLowerCase();
     validations++;
   } else { 
