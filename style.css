@@ -1,3 +1,7 @@
+:root {
+  --main-text: hsla(194, 100%, 41%, 0.92);
+}
+
 body {
     background-color: #005e7a;
     font-family: 'Oswald', sans-serif;
@@ -12,8 +16,8 @@ body {
     display: none;
     
     border-radius: 44px;
-background: #005e7a;
-box-shadow:  8px 8px 11px #00526a,
+    background: #005e7a;
+    box-shadow:  8px 8px 11px #00526a,
              -8px -8px 11px #006a8a;
   }
   
@@ -34,8 +38,8 @@ box-shadow:  8px 8px 11px #00526a,
     border-style: none;
     
     border-radius: 50px;
-  background: #006280;
-  box-shadow: inset 5px 5px 11px #005873,
+    background: #006280;
+    box-shadow: inset 5px 5px 11px #005873,
               inset -5px -5px 11px #006c8d;
   }
   input[type="submit"], button {
@@ -48,15 +52,19 @@ box-shadow:  8px 8px 11px #00526a,
     border-style: none;
     
     border-radius: 50px;
-    background: #006a8a;
-    box-shadow:  5px 5px 11px #004a61,
-                -5px -5px 11px #008ab3;
+    background: linear-gradient(145deg, #007194, #005f7c);
+    box-shadow:  5px 5px 5px #005873,
+             -5px -5px 5px #007ca1;
   }
   ::placeholder {
     color: hsla(194, 100%, 41%, 0.42);
   }
   input:focus {
     border-style: none;
+  }
+
+  #error-field {
+    margin: 10px auto;
   }
 
   ul {
